@@ -42,18 +42,18 @@ def find_path(map, st_point, fn_point):
         ############
         for i in range(0, len(path_array)):
             path = path_array[i]
-            mp = -1
+            mp = False
             l = len(path) - 1
             for p in gen_points(path[l], map):
                 if(p not in explored):
                     if(p == fn_point):
-                        if(mp > 0):
+                        if(mp):
                             del path[-1]
                         path.append(p)
                         fin_path = path
                         flag = True
                         break
-                    if(mp < 0):
+                    if(not mp):
                         mp = 1
                         path.append(p)
                     else:
@@ -62,7 +62,7 @@ def find_path(map, st_point, fn_point):
                         np.append(p)
                         path_array.append(np)
             explored.append(path[l])
-            if(mp < 0):
+            if(not mp):
                 dels.append(i)
             if(flag):
                 break
